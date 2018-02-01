@@ -1,0 +1,124 @@
+Vue+ElementUI项目:https://taylorchen709.github.io/vue-admin/#/table
+
+状态
+	data里面的变量都是状态
+	集中管理data里面的变量
+	
+为什么要用Vuex
+	当我们构建一个大中型的单页面应用程序时，Vuex可以更好的帮助我们在组件外部统一管理状态
+	
+Vuex的核心概念
+	State:数据源
+	Getters:可以派生出一些新的状态
+	Mutations:更改Vuex的store中的状态的唯一方法是提交mutation
+	Actions:提交的是mutation,而不是直接变更状态;可以包含任意异步操作
+	Modules:面对复杂的应用程序,当管理的状态比校多时,需要将Vuex的store对象分割成模块
+	
+	1.单一的状态树
+	const Counter = {
+		computed: {
+			count () {
+				return this.$store.state.count
+			}
+		}
+	}
+	2.
+	const store = new Vuex.Store({
+		state: {
+			todos: [
+				{
+					id: 1, text: '...', done: true
+				},
+				{
+					id: 2, text: '...', done: false
+				}
+			]
+		},
+		getters: {
+			doneTodos: state => {
+				// filter数据过滤处理方法，返回todo.done为true的数据
+				return state.todos.filter(todo => todo.done)
+			}
+		},
+		mutations: {
+			// state就是上面state
+			increment (state) {
+				//变更状态
+				state.count++
+			}
+		}
+	})
+	触发提交：store.commit('increment')
+	3.
+	const store = new Vuex.Store({
+		state: {
+			count: 0
+		},
+		mutations: {
+			increment (state) {
+				state.count++
+			}
+		},
+		actions: {
+			increment (context) {
+				context.commit('increment')
+			}
+		}
+	})
+	
+Vuex状态管理：
+	Vue Components发生变化 -> 通过dispatch方法 -> 去提交acti ons ->
+	actions通过提交commit -> 改变mutations -> mutations会改变state ->
+	state改变后会时实的渲染Vue Components
+
+使用git提交到github准备：
+	使用https本地git bash无法输入密码，改成ssh方式
+		cd ~/.ssh
+	创建ssh密钥
+		ssh-keygen -t rsa -C "你的email地址"
+	输入密码，不用输入直接enter
+	查看已连接的远程仓库
+		git remote -v
+使用git提交到github提交：
+	建立git仓库
+		git init 
+	将项目的所有文件添加到仓库中
+		git add .
+	将add的文件commit到仓库
+		git commit -m "注释语句"
+	将本地的仓库关联到github上
+		git remote add origin git仓库地址
+	上传github之前，要先pull一下
+		git pull origin master
+	上传到远程仓库
+		git push -u origin master 
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+		
+
